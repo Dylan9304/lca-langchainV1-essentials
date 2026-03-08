@@ -193,3 +193,6 @@ Thumbs.db
 .vscode/
 
 **/.langgraph_api/
+
+# Keep local env and virtualenv out of git.
+python/.venv/

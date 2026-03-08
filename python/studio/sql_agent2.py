@@ -1,16 +1,22 @@
 """SQL agent for studio."""
 
+import os
 import pathlib
 import re
 
 import requests
 from langchain.agents import create_agent
-from langchain.chat_models import init_chat_model
 from langchain_community.utilities import SQLDatabase
-from langchain_core.messages import SystemMessage
 from langchain_core.tools import tool
+from langchain_openai import ChatOpenAI
 
-llm = init_chat_model("openai:gpt-5")
+# The original course graph used OpenAI.
+# For this workspace, reuse the same GLM Coding Plan setup as the notebook.
+llm = ChatOpenAI(
+    model=os.getenv("ZAI_MODEL", "GLM-4.7"),
+    api_key=os.environ["ZAI_API_KEY"],
+    base_url="https://api.z.ai/api/coding/paas/v4",
+)
 
 # database is from:
 # url = "https://storage.googleapis.com/benchmarks-artifacts/chinook/Chinook.db"
